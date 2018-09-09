@@ -1,0 +1,26 @@
+#服务端口号
+server.port=8001
+
+#指定拦截规则
+#server.servlet-path=*.html
+
+#设置日志级别，默认INFO
+logging.level.org.springframework=INFO
+
+#spring mvc视图解析器配置
+#spring.mvc.view.prefix=/
+#spring.mvc.view.suffix=
+
+#32位的随机字符
+roncoo.secret=${random.value}
+#随机的数字，本次是4位
+roncoo.number=${random.int(4)}
+
+#引用这里的变量
+roncoo.name=www.dev.com
+roncoo.desc=${roncoo.name} is a domain name
+
+#日期格式化显示
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+#时区
+spring.jackson.time-zone=Asia/Chongqing

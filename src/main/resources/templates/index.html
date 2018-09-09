@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>首页</title>
+    <script type="application/javascript" src="/js/jquery-2.1.4.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="application/javascript">
+        $(function () {
+            console.info(1);
+        })
+    </script>
+</head>
+<body>
+    <h1>hello world！</h1>
+    <h1 th:text="${myName}"></h1>
+    <img src="/images/center.jpg" />
+</body>
+</html>

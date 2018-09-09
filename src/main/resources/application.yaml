@@ -1,0 +1,131 @@
+#服务端口号
+server:
+  port: 8080
+#指定拦截规则
+#server.servlet-path=*.html
+
+#设置日志级别，默认INFO
+logging:
+  level:
+    org:
+      springframework: INFO
+
+#spring mvc视图解析器配置
+#spring.mvc.view.prefix=/
+#spring.mvc.view.suffix=
+
+roncoo:
+  secret: ${random.value} #32位的随机字符
+  number: ${random.int(4)} #随机的数字，本次是4位
+  name: www.roncoo.com
+  desc: ${roncoo.name} is a domain name #引用这里的变量
+
+spring:
+  profiles:
+      active: dev #指定环境
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss #日期格式化显示
+    time-zone: Asia/Chongqing #时区
+  http:
+    multipart:
+      max-file-size: 10Mb #最大上传文件大小
+      max-request-size: 20Mb #最大请求文件大小
+
+#使用---来区分不同环境
+---
+spring:
+  profiles: dev #开发环境
+  datasource:
+    url: jdbc:mysql://localhost/spring_boot_demo?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update #没有表的时候自动创建
+    show-sql: true #开发时打印sql语句
+  redis:
+    host: localhost #默认localhost
+    port: 6379 #端口号
+    database: 0 #数据库，默认0
+    pool:
+      max-active: 8 #最大可用，实际需要计算
+      max-idle: 8 #最大空闲，通常等于最大可用
+      max-wait: -1 #最长等待时间，-1表示不限制
+      min-idle: 0 #最小空闲
+    #password: #密码，默认为空，生产环境需要设置
+  cache:
+    type: redis #采用spring cache+redis
+  #activemq:
+  #  in-memory: true #消息队列，开发时先放内存中，生产环境要安装
+  #rabbitmq:
+  #  host: localhost
+  #  port: 5672
+  #  password: guest
+  #  username: guest
+  session:
+    store-type: redis #spring-session-redis做集群
+
+#监控
+#端点的配置
+endpoints:
+  sensitive: true
+  shutdown:
+    enabled: true #开启shutdown以后可以通过post关闭应用，慎用
+#断点保护
+security:
+  basic:
+    enabled: true
+    path: /manage #spring-security只保护/manage，默认保护所有资源
+  user:
+    name: monkey
+    password: 123456
+
+management:
+  security:
+    roles: SUPERUSER
+  context-path: /manage #指定监控界面访问的路径，这样spring-security就可以进行保护了，防止所有人访问
+
+#自定义路径
+
+#management:
+#  security:
+#    enabled: false #在没有使用spring-security前，先禁用安全检查，所有人都可以访问，测试用，生产不行
+
+
+server:
+  port: 8011 #应用端口号
+
+roncoo:
+  secret: ${random.value} #32位的随机字符
+  number: ${random.int(4)} #随机的数字，本次是4位
+  name: www.dev.com
+  desc: ${roncoo.name} is a domain name
+
+
+
+---
+spring:
+  profiles: test #测试环境
+
+server:
+  port: 8002
+
+roncoo:
+  secret: ${random.value} #32位的随机字符
+  number: ${random.int(4)} #随机的数字，本次是4位
+  name: www.test.com
+  desc: ${roncoo.name} is a domain name #引用这里的变量
+
+---
+spring:
+  profiles: prod #生产环境
+
+server:
+  port: 8003
+
+roncoo:
+  secret: ${random.value} #32位的随机字符
+  number: ${random.int(4)} #随机的数字，本次是4位
+  name: www.prod.com
+  desc: ${roncoo.name} is a domain name #引用这里的变量
