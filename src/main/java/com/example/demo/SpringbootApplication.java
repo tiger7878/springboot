@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.jms.annotation.EnableJms;
 
 //默认会扫描本包和子包中的所有类
@@ -13,6 +14,7 @@ import org.springframework.jms.annotation.EnableJms;
 @EnableCaching //开启缓存支持
 @EnableJms //开启JMS
 @EnableRabbit //开启RabbitMQ支持
+@ImportResource(locations = {"classpath:druid-bean.xml"}) //配置druid监控spring的，但是没效果
 public class SpringbootApplication {
 
 	public static void main(String[] args) {

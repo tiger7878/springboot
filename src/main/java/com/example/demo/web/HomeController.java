@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.amqp.AmqpComponet;
 import com.example.demo.bean.User;
 import com.example.demo.config.MyProperties;
+import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +32,9 @@ public class HomeController {
 
     @Autowired
     private MyProperties myProperties;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String index(ModelMap model, HttpSession session){
@@ -68,6 +70,14 @@ public class HomeController {
         user.setName(name);
         user.setBirthday(new Date());
         return user;
+    }
+
+    @RequestMapping(value = "/register/{name}",method = RequestMethod.GET)
+    @ResponseBody
+    public String register(@PathVariable String name, HttpServletRequest request){
+        String ip=request.getRemoteHost();
+
+        return userService.register(name,ip);
     }
 
 }

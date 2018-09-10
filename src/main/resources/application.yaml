@@ -40,6 +40,15 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource #数据库连接池使用Druid，不配置它时使用默认的
+    druid:
+      initial-size: 8 #初始化连接池大小
+      max-active: 10 #最大连接数
+      min-idle: 10 #最小空闲连接数
+      query-timeout: 6000 #查询超时时间
+      transaction-query-timeout: 6000 #事务查询超时
+      remove-abandoned-timeout: 1800 #关闭空闲连接超时时间
+      filtes: stat,config #用来监控sql和spring的配置，不过默认监控了sql，但是spring监控没效果。。。
   jpa:
     hibernate:
       ddl-auto: update #没有表的时候自动创建

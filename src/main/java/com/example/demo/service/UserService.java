@@ -31,9 +31,9 @@ public class UserService {
 
         roncooUserDao.save(roncooUser);
 
-        if (true){
+        /*if (true){
             throw new RuntimeException("自己抛出的异常！");
-        }
+        }*/
 
         RoncooUserLog roncooUserLog=new RoncooUserLog();
         roncooUserLog.setUserName(name);
