@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 异常处理方案一：自定义错误控制器
- * 备注：欢迎下面的两个注释就启用了
+ * 备注：把下面的两个注释就启用了
  * @author: monkey
  * @date: 2018/9/2 22:38
  */
